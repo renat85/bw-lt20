@@ -1,0 +1,38 @@
+esphome:
+  name: hall_lamp
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: "SSID"
+  password: "you_wifi_pass"
+
+api:
+
+#web_server:
+#  port: 80
+
+logger:
+
+ota:
+
+light:
+  - platform: cwww
+    name: "hall_lamp_cwww"
+    id: "hall_lamp_cwww"
+    cold_white: output_cold
+    warm_white: output_warm
+    cold_white_color_temperature: 6500 K
+    warm_white_color_temperature: 2700 K
+    
+output:
+  - platform: esp8266_pwm
+    id: output_cold
+    pin: GPIO5
+  - platform: esp8266_pwm
+    id: output_warm
+    pin: GPIO13
+    
+switch:
+  - platform: restart
+    name: "hall_lamp_restart"
